@@ -26,6 +26,4 @@ My implementation of the ["Glances" API](https://pushover.net/api/glances) allow
 
 **You will want to get [The Pushover App](https://itunes.apple.com/us/app/pushover-notifications/id506088175?mt=8&at=1010l3fx) from the Apple app store if you haven't already...**
 
-|Apple-Watch-Example|
-
-.. |Apple-Watch-Example| image:: https://raw.github.com/Amir974/home-assistant-custom-components/images/apple-watch-with-pushover-glances.PNG
+![Apple-Watch-Example](/images/apple-watch-with-pushover-glances.PNG?raw=true "Apple Watch with Home-Assistant Data via Pushover Glances")
