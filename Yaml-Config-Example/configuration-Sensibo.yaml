@@ -1,0 +1,147 @@
+###################################
+##  Customizing the name presented for the components along with relevant image / icons
+##  (this part is nice to have... not manadatory)
+###################################
+customize:
+  climate.home:
+    friendly_name: 'Sensibo'
+    entity_picture: http://www.virtualida.com/wp-content/uploads/2016/10/sensibo.jpg
+    icon: mdi:air-conditioner
+#
+  sensor.inside_humidity:
+    friendly_name: 'Inside Humidity'
+    icon: mdi:water
+#
+  sensor.inside_temperature:
+    friendly_name: 'Inside Temperatur'
+    icon: mdi:thermometer-lines 
+#
+  switch.home:
+    friendly_name: 'Home AC'
+    icon: mdi:air-conditioner
+#
+###################################
+##  Sensor data only - measured temperatur & humidity
+###################################
+sensor:
+  - platform: sensibosensor
+    # get your API key [https://home.sensibo.com/me/api](https://home.sensibo.com/me/api)
+    apiKey: someAPIkeyImadeUP
+    # name - the name you gave your sensibo pod - must be identical to how it appears in the app
+    name: "Home"
+    scan_interval: 300
+#
+###################################
+## Choose platform sensibosettingsandswitch / sensibosettingsonly - not both
+###################################
+climate:
+  platform: sensibosettingsonly
+  # Get your API key [https://home.sensibo.com/me/api](https://home.sensibo.com/me/api)
+  apiKey: someAPIkeyImadeUP
+  # Name - the name you gave your sensibo pod - must be identical to how it appears in the app
+  name: "Home"
+  scan_interval: 30
+  # Initial settings for min - max prefered temperatures for automation
+  target_temp_low: 24
+  target_temp_high: 27
+  # Folowing are the min / max temperatures supported by your AC!
+  max_temp: 30
+  min_temp: 16
+#
+###################################
+##  Switch for on/off control only
+###################################
+switch:
+  - platform: sensiboswitch
+    # Get your API key [https://home.sensibo.com/me/api](https://home.sensibo.com/me/api)
+    apiKey: someAPIkeyImadeUP
+    # Name - the name you gave your sensibo pod - must be identical to how it appears in the app
+    name: "Home"
+#
+###################################
+## This setting will allow you to emulate the sensibo switch so it can be discovered by 
+## Amazon echo / Logitech Home HUB / Homebridge and other platforms that work with philips hue!
+###################################
+emulated_hue:
+  host_ip: your-rPi-IP
+  exposed_domains:
+    - switch
+#
+automation:  
+###################################
+##  Hidden automation to verify that the target temperature is within the prefered min/max range you set
+##  it will run every 20 minuts and put an alert on your home-assistant dashboard if the settings do not make sense
+###################################
+  - alias: "Sensibo target temp out of range"
+    hide_entity: True
+    trigger:
+     - platform: time
+       minutes: '/20'
+       seconds: 0
+    condition:
+      condition: or
+      conditions:
+       - condition: numeric_state
+         entity_id: climate.home
+         value_template: '{{ state.attributes.target_temp_low - state.attributes.temperature}}'
+         above: 0
+       - condition: numeric_state
+         entity_id: climate.home
+         value_template: '{{ state.attributes.temperature - state.attributes.target_temp_high}}'
+         above: 0
+    action:
+      - service: persistent_notification.create
+        data:
+          title: "Target Temperatur Out of Range"
+          message: "Sensiboe Target temperature  {{ states.climate.home.attributes.temperature }} is out of range {{ states.climate.home.attributes.target_temp_low }} - {{ states.climate.home.attributes.target_temp_high }}. - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
+          notification_id: "Climate temp out of range"
+#
+###################################
+##  Automation for checking if the measured temperature is lower than the minimal prefered range you selected
+##  it will run every 30 minuts and send a pushbullet notification if it's too cold.(
+##  * it can just as well be set to turn on the AC via the switch / climate components)
+###################################
+  - alias: "Sensibo too cold"
+    hide_entity: False
+    initial_state: False
+    trigger:
+     - platform: time
+       minutes: '/30'
+       seconds: 0
+    condition:
+     - condition: numeric_state
+       entity_id: climate.home
+       value_template: '{{ state.attributes.target_temp_low - state.attributes.current_temperature}}'
+       above: 0.5
+     - condition: state
+       entity_id: device_tracker.amir
+       state: 'home'
+    action:
+      - service: notify.pushbullet
+        data:
+          message: "Too cold"
+#
+###################################
+##  Automation for checking if the measured temperature is higher than the maximal prefered range you selected
+##  it will run every 30 minuts and send a pushbullet notification if it's too hot.(
+##  * it can just as well be set to turn off the AC via the switch / climate components or even change operation to cool down the room)
+###################################
+  - alias: "Sensibo too hot"
+    hide_entity: False
+    initial_state: False
+    trigger:
+     - platform: time
+       minutes: '/30'
+       seconds: 0
+    condition:
+     - condition: numeric_state
+       entity_id: climate.home
+       value_template: '{{ state.attributes.current_temperature - state.attributes.target_temp_high}}'
+       above: 0.5
+     - condition: state
+       entity_id: device_tracker.amir
+       state: 'home'
+    action:
+      - service: notify.pushbullet
+        data:
+          message: "Too HOT"

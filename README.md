@@ -17,6 +17,10 @@ For my smart thermostat [Sensibo](https://www.sensibo.com/) I created 3 differen
   
     These are just two implementations for climate components I was playing with - chose the one you prefer (no need to setup both!)
 
+![Weather-Dashboard-Sensibo-On-Home-Assistant](/images/Weather-Dashboard-Sensibo-On-Home-Assistant.PNG?raw=true "Home Assistant Dashboard Sample For Sensibo Components")
+
+![Climate-Options-Sensibo-On-HomeAssistant](/images/Climate-Options-Sensibo-On-HomeAssistant.PNG?raw=true "Climate Components Card For Sensibo")
+
 ## Pushover - Glances
 While Home-Assistant already had a [notification platform implementation for pushover](https://home-assistant.io/components/notify.pushover/), at present it's only for sending push notifications...
 
@@ -27,3 +31,9 @@ My implementation of the ["Glances" API](https://pushover.net/api/glances) allow
 **You will want to get [The Pushover App](https://itunes.apple.com/us/app/pushover-notifications/id506088175?mt=8&at=1010l3fx) from the Apple app store if you haven't already...**
 
 ![Apple-Watch-Example](/images/apple-watch-with-pushover-glances.PNG?raw=true "Apple Watch with Home-Assistant Data via Pushover Glances")
+
+# Installation Instructions
+
+* Once you are done setting up the platform (check out http://www.bruhautomation.com/ for excelnt video / written tutorials),
+* Create a "custom_components" folder where the configuration.yaml file is located, and sub folders for the relevant components types similar to the structure I have [here](https://github.com/Amir974/home-assistant-custom-components/tree/master/custom_components) just for the componts you are going to use...
+* Next you should take care of configuration and settings for the components - take a look at the [Yaml-Config-Example](https://github.com/Amir974/home-assistant-custom-components/tree/master/Yaml-Config-Example) folder and pay attention to the comments - it's not a straight forward copy-paste

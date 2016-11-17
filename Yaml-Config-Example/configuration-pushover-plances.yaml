@@ -1,0 +1,31 @@
+###################################
+##  Notify platfom using Pushover- Glances API
+###################################
+notify:
+  - name: pushoverglances
+    platform: pushoverglances
+    # Get your USER key  after signing up at [  # Get your API key [https://home.sensibo.com/me/api](https://home.sensibo.com/me/api)](  # Get your API key [https://home.sensibo.com/me/api](https://home.sensibo.com/me/api))
+    user_key: someUSERkeyImadeUP
+    # Get your API key after creting an application within [https://pushover.net/apps/build](https://pushover.net/apps/build)
+    api_key: someAPIkeyImadeUP
+#
+automation:
+  ###################################
+  ##  Send an update as soon as Home assistant Start Up is done
+  ##  Can also be used to notified when the lights turn on / a door or window is open / number open windows etc.
+  ###################################  
+  - alias: Startup Notification
+    hide_entity: True
+    trigger:
+      platform: event
+      event_type: homeassistant_start
+    action:
+      - service: notify.pushoverglances
+        data:
+          # Title (optional) will come before the text message
+          title: I
+          # message (optional) The short text you want to appear in the text area
+          message: "HA Startup"
+          # data, followed by count (optional) a numeric message for the smaller notification area on the watch face
+          data:
+            count: "100"
