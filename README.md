@@ -5,6 +5,10 @@ Learn more about the [Home-assistant platform](https://home-assistant.io/)
 
 # Included Components
 
+See below:
+ * Sensibo Smart Thermostat compoennts
+ * Pushover-Glances for displaying information on Apple Watch for example
+
 ## Sensibo
 
 For my smart thermostat [Sensibo](https://www.sensibo.com/) I created 3 different components you can choose from:
