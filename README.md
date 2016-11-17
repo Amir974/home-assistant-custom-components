@@ -17,9 +17,9 @@ For my smart thermostat [Sensibo](https://www.sensibo.com/) I created 3 differen
   
     These are just two implementations for climate components I was playing with - chose the one you prefer (no need to setup both!)
 
-![Weather-Dashboard-Sensibo-On-Home-Assistant](/images/Weather-Dashboard-Sensibo-On-Home-Assistant.PNG?raw=true) "Home Assistant Dashboard Sample For Sensibo Components"
+![Weather-Dashboard-Sensibo-On-Home-Assistant](/images/images/Weather-Dashboard-Sensibo-On-Home-Assistant.png?raw=true "Home Assistant Dashboard Sample For Sensibo Components")
 
-![Climate-Options-Sensibo-On-HomeAssistant](/images/Climate-Options-Sensibo-On-HomeAssistant.PNG?raw=true) "Climate Components Card For Sensibo"
+![Climate-Options-Sensibo-On-HomeAssistant](/images/Climate-Options-Sensibo-On-HomeAssistant.png?raw=true "Climate Components Card For Sensibo")
 
 ## Pushover - Glances
 While Home-Assistant already had a [notification platform implementation for pushover](https://home-assistant.io/components/notify.pushover/), at present it's only for sending push notifications...
