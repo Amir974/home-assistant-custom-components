@@ -28,7 +28,7 @@ For my smart thermostat [Sensibo](https://www.sensibo.com/) I created 3 differen
 ## Pushover - Glances
 While Home-Assistant already had a [notification platform implementation for pushover](https://home-assistant.io/components/notify.pushover/), at present it's only for sending push notifications...
 
-My implementation of the ["Glances" API](https://pushover.net/api/glances) allows you to send information directly to Apple Watch face (not as push). 
+My implementation of the ["Glances" A](https://pushover.net/api/glances) allows you to send information directly to Apple Watch face (not as push). 
 
 * **Notify** - (``pushoverglances``) will let you connect the service and set it up so you can send *count numeric messages* to the little info placeholder and  *short text messages* to the the larger placeholder
 
@@ -36,8 +36,17 @@ My implementation of the ["Glances" API](https://pushover.net/api/glances) allow
 
 ![Apple-Watch-Example](/images/apple-watch-with-pushover-glances.PNG?raw=true "Apple Watch with Home-Assistant Data via Pushover Glances")
 
+# If you want to go into Home-Assistant and are missing a Raspberry Pi
+
+Here are a few places to find one
+ * [Raspberry Pi 3 @Amazon](http://amzn.to/2g2hA31)
+ * [Raspberry Pi 3 @BangGood](http://www.banggood.com/Raspberry-Pi-3-Model-B-ARM-Cortex-A53-CPU-1_2GHz-64-Bit-Quad-Core-1GB-RAM-10-Times-B-p-1041862.html?p=4S2609598718201405F0)
+ * [Raspberry Pi 3 @eBay](http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=9&pub=5575128384&toolid=10001&campid=5337704811&customid=&icep_uq=raspberry+pi+3&icep_sellerId=&icep_ex_kw=&icep_sortBy=12&icep_catId=&icep_minPrice=&icep_maxPrice=&ipn=psmain&icep_vectorid=229466&kwid=902099&mtid=824&kw=lg)
+
+
 # Installation Instructions
 
+* I invite you to read about this component and more [on my blog](http://www.virtualida.com/2016/11/status-of-my-smart-home/)
 * Once you are done setting up the platform (check out http://www.bruhautomation.com/ for excelnt video / written tutorials),
 * Create a "custom_components" folder where the configuration.yaml file is located, and sub folders for the relevant components types similar to the structure I have [here](https://github.com/Amir974/home-assistant-custom-components/tree/master/custom_components) just for the componts you are going to use...
 * Next you should take care of configuration and settings for the components - take a look at the [Yaml-Config-Example](https://github.com/Amir974/home-assistant-custom-components/tree/master/Yaml-Config-Example) folder and pay attention to the comments - it's not a straight forward copy-paste
