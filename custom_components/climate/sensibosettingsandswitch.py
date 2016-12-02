@@ -50,6 +50,9 @@ class SensiboClientAPI(object):
         self._patch("/pods/%s/acStates/%s" % (podUid, propertyToChange),
                 json.dumps({'currentAcState': currentAcState, 'newValue': newValue}))
 
+"""I want to make sure there is a minimal difference between min & max target temperatures """
+const_min_max_minimal_dif = 2
+
 """ key's expected from user configuration"""
 CONF_API = 'apiKey'
 CONF_NAME = 'name'
@@ -253,14 +256,15 @@ class SensiboClimate(ClimateDevice):
             self._target_temperature = kwargs.get(ATTR_TEMPERATURE)
             self.makeitso('targetTemperature',int(kwargs.get(ATTR_TEMPERATURE)))
 
-        """Making sure there is at least 1 degree difference between high / low target temps
+        """Making sure there is at least (const_min_max_minimal_dif) degree difference between high / low target temps"""
         if kwargs.get(ATTR_TARGET_TEMP_HIGH) is not None and \
            kwargs.get(ATTR_TARGET_TEMP_LOW) is not None:
+            self._target_temperature_low = kwargs.get(ATTR_TARGET_TEMP_LOW)
             self._target_temperature_high = kwargs.get(ATTR_TARGET_TEMP_HIGH)
-            if (kwargs.get(ATTR_TARGET_TEMP_HIGH) - kwargs.get(ATTR_TARGET_TEMP_LOW) < 1):
-                self._target_temperature_low = kwargs.get(ATTR_TARGET_TEMP_HIGH) + 1
+            if (kwargs.get(ATTR_TARGET_TEMP_HIGH) - kwargs.get(ATTR_TARGET_TEMP_LOW) < const_min_max_minimal_dif):
+                self._target_temperature_high = kwargs.get(ATTR_TARGET_TEMP_LOW) + const_min_max_minimal_dif
             else:
-                self._target_temperature_low = kwargs.get(ATTR_TARGET_TEMP_LOW)"""
+                self._target_temperature_high = kwargs.get(ATTR_TARGET_TEMP_HIGH)
 
     def set_humidity(self, humidity):
         """Set new target temperature."""
