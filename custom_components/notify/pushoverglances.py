@@ -27,7 +27,7 @@ PLATFORM_SCHEMA = cv.PLATFORM_SCHEMA.extend({
 })
 
 # pylint: disable=unused-variable
-def get_service(hass, config):
+def get_service(hass, config,discovery_info):
     """Get the Pushover notification service (Verify the keys)"""
     from pushover import InitError
     #validation part
