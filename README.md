@@ -1,3 +1,12 @@
+
+
+# ******
+# Important: these components are no longer supported
+## I recommend gou switch over to native componemts that provide suoerior expereience and funtionality these days 
+# ******
+
+
+
 ``home-assistant-custom-components`` include some custom components I wrote for my implementation of home-assistant - the open-source home automation platform.
 
 Learn more about the [Home-assistant platform](https://home-assistant.io/)
