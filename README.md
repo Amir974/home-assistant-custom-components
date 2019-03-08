@@ -2,7 +2,7 @@
 
 # ******
 # Important: these components are no longer supported
-## I recommend gou switch over to native componemts that provide suoerior expereience and funtionality these days 
+## I recommend you switch over to native componemts that provide suoerior expereience and funtionality these days 
 # ******
 
 
